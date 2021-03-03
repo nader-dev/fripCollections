@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentsRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CommentsRepository::class)
@@ -14,21 +15,25 @@ class Comments
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("produit:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("produit:read")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("produit:read")
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("produit:read")
      */
     private $createdAt;
 

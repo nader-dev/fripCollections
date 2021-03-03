@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProduitsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitsRepository::class)
@@ -16,26 +18,35 @@ class Produits
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("produit:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("produit:read")
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("produit:read")
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("produit:read")
      */
     private $prix;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("produit:read")
      */
     private $createdAt;
 
@@ -51,6 +62,7 @@ class Produits
 
     /**
      * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="produit")
+     * @Groups("produit:read")
      */
     private $comment;
 
